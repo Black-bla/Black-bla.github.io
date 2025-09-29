@@ -1,75 +1,74 @@
-# Black-bla.github.io
+## Black-bla.github.io
 
-One-page personal portfolio site with:
+Current version: A clean, fast, single‑page personal portfolio built with plain HTML, CSS, and a little vanilla JavaScript.
 
-- Dark / light theme toggle (persisted)
-- Animated hero (glitch title, typewriter subtitle, particle background)
-- Section reveal on scroll (IntersectionObserver)
-- Project cards with hover lift + glass morphism aesthetic
-- Stats counters (animated)
-- Responsive mobile navigation
-- Accessible semantic HTML and reduced-motion respect
+### 🔥 Key Visual Elements
+* Fullscreen diagonal split hero (left: branded image, right: intro content)
+* Floating logo over the image side
+* Horizontal nav (About / Projects / Contact)
+* Animated hero content fade / slide
+* Red "About Me" emphasis section for personal story
+* Image‑background project cards with dark gradient overlays + hover zoom
+* Responsive layout: stacks gracefully on mobile
 
-## Structure
+### ✅ What Was Removed (Legacy Features No Longer Present)
+* Authentication / account pages
+* Theme toggle (light/dark)
+* Glitch / typewriter / particle experimental effects
+* Stats counters & scroll reveal utilities
 
+### 📁 Structure
 ```
-index.html              # Main single-page document
-assets/css/style.css    # Core styles (themes, layout, animations)
-assets/js/app.js        # Interactivity + animations + theming
-assets/img/             # (placeholder for images)
-```
-
-## Local Preview
-
-You can use any static server. Example with Python:
-
-```
-python3 -m http.server 8000
+index.html               # Main page
+assets/css/style.css     # All styling (layout, hero, cards, responsiveness)
+assets/js/app.js         # Minor interaction hooks / future expansion
+assets/images/           # Hero + project images (1.jpeg,2.jpeg,3.jpeg,image.jpeg)
 ```
 
+### 🚀 Run Locally
+Any static server works. Examples:
+
+Python:
+```
+python -m http.server 8000
+```
+Node (npx serve):
+```
+npx serve .
+```
 Then open: http://localhost:8000
 
-## Customization Tips
+### 🛠 Customize
+| Area | How |
+|------|-----|
+| Hero background | Replace `assets/images/image.jpeg` or adjust `.hero-bg-image` CSS |
+| Logo text | Edit the `.hero-logo` div in `index.html` |
+| Diagonal shape | Tweak `clip-path` in `.hero-image-side` |
+| Project images | Replace `assets/images/1.jpeg` etc. |
+| Project copy | Edit each `.project-card-content` block |
+| About section color | Change `#about { background: #dc2626; }` in CSS |
+| Accent gradients | Modify linear-gradient in `.hero-title` / `.hero-btn` |
 
-- Replace placeholder project cards in the `#projects` section.
-- Adjust accent gradient via `--gradient-accent` in `style.css`.
-- Add real form handling (currently a demo) by wiring a backend or service (Netlify Forms, Formspree, etc.).
-- Update stats counts in the `data-count` attributes inside `index.html`.
+### 📐 Notable CSS Techniques
+* `clip-path: polygon(...)` for diagonal hero boundary
+* CSS custom properties for theme tokens (colors, spacing, shadow)
+* Layered background image + overlay gradients for project cards
+* Keyframe animations for hero entrance
+* Responsive grid with `repeat(auto-fit, minmax())`
 
-## Features
+### 🧪 Suggested Next Enhancements
+* Add a lightweight accessibility pass (skip link, focus styles refinement)
+* Lazy‑load project images (`loading="lazy"`)
+* Add Open Graph / Twitter meta tags
+* Integrate a real contact endpoint (Formspree / Netlify Forms / backend)
+* Fallback system font stack already in place—optionally introduce a display font
 
-- **Responsive Design**: Mobile-first approach with smooth animations
-- **Theme Switching**: Dark/light mode with localStorage persistence
-- **Performance Optimized**: Vanilla JavaScript, no heavy frameworks
-- **Accessibility**: Proper ARIA labels, semantic HTML, and reduced motion support
-- **Modern CSS**: Uses CSS custom properties, flexbox, and grid
-- **Interactive Elements**: Hover effects, scroll animations, and particle background
+### 🗂 Deployment Notes
+* Designed for GitHub Pages root (repo name matches user domain)
+* If styles appear missing after deploy: hard reload (Ctrl+F5) or append `?v=1` to stylesheet URL due to page caching
 
-## Browser Support
-
-Works in all modern browsers that support:
-- CSS Custom Properties
-- ES6 Modules
-- Intersection Observer API
-- CSS Grid and Flexbox
-4. (Optional) Enable Email Verification for better security.
-5. In `assets/js/appwriteClient.js` update:
-	- `APPWRITE_ENDPOINT` (e.g. https://cloud.appwrite.io/v1)
-	- `APPWRITE_PROJECT_ID`
-6. Deploy / serve. Registration & login will now create sessions stored via cookies.
-7. The homepage silently checks `account.get()` to toggle nav state.
-
-### Adding OAuth Providers
-If you enable OAuth (GitHub, Google, etc.), add buttons invoking `account.createOAuth2Session('provider', 'account.html')`.
-
-### Security Notes
-- Never embed API keys (Appwrite uses client SDK safely for auth flows).
-- For database or storage operations requiring rules, configure permissions server-side or via Appwrite's console.
-- Consider adding a serverless function if you later need privileged actions.
-
-## License
-
-MIT (add a LICENSE file if you want to formalize it).
+### 📄 License
+MIT (feel free to adapt). Add a LICENSE file if you want explicit redistribution terms.
 
 ---
-Built for a sleek, performant, and visually rich personal brand presence.
+Built lean on purpose: no framework, minimal JS, strong visuals.
