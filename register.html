@@ -50,7 +50,7 @@
 
   <script type="module">
     import './assets/js/app.js';
-    import { account, ID } from './assets/js/appwriteClient.js';
+    import { account, ID, handleAppwriteError } from './assets/js/appwriteClient.js';
 
     const form = document.getElementById('registerForm');
     const statusEl = document.getElementById('registerStatus');
@@ -58,19 +58,50 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       statusEl.textContent = 'Creating account…';
+      statusEl.style.color = 'var(--text-soft)';
+      
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       const password = form.password.value;
+      
+      // Basic validation
+      if (!name || !email || !password) {
+        statusEl.textContent = 'Please fill in all fields.';
+        statusEl.style.color = 'var(--danger)';
+        return;
+      }
+      
+      if (password.length < 8) {
+        statusEl.textContent = 'Password must be at least 8 characters long.';
+        statusEl.style.color = 'var(--danger)';
+        return;
+      }
+      
       try {
         await account.create(ID.unique(), email, password, name);
         statusEl.textContent = 'Account created! Logging you in…';
+        statusEl.style.color = 'var(--ok)';
         await account.createEmailPasswordSession(email, password);
-        setTimeout(()=> { window.location.href = 'account.html'; }, 700);
+        setTimeout(()=> { window.location.href = 'dashboard.html'; }, 700);
       } catch (err) {
-        console.error(err);
-        statusEl.textContent = err.message.replace('Appwrite service error: ', '') || 'Registration failed';
+        console.error('Registration error:', err);
+        statusEl.textContent = handleAppwriteError(err);
+        statusEl.style.color = 'var(--danger)';
       }
     });
+
+    // Check if user is already logged in
+    async function checkExistingSession() {
+      try {
+        await account.get();
+        // User is already logged in, redirect to dashboard
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        // User not logged in, continue with registration page
+      }
+    }
+    
+    checkExistingSession();
   </script>
 </body>
 </html>

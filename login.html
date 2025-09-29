@@ -46,7 +46,7 @@
 
   <script type="module">
     import './assets/js/app.js'; // shared theming + canvas
-    import { account } from './assets/js/appwriteClient.js';
+    import { account, handleAppwriteError } from './assets/js/appwriteClient.js';
 
     const form = document.getElementById('loginForm');
     const statusEl = document.getElementById('loginStatus');
@@ -54,17 +54,43 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       statusEl.textContent = 'Signing in…';
+      statusEl.style.color = 'var(--text-soft)';
+      
       const email = form.email.value.trim();
       const password = form.password.value;
+      
+      // Basic validation
+      if (!email || !password) {
+        statusEl.textContent = 'Please fill in all fields.';
+        statusEl.style.color = 'var(--danger)';
+        return;
+      }
+      
       try {
         await account.createEmailPasswordSession(email, password);
         statusEl.textContent = 'Success! Redirecting…';
-        setTimeout(()=> { window.location.href = 'account.html'; }, 600);
+        statusEl.style.color = 'var(--ok)';
+        const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || 'dashboard.html';
+        setTimeout(()=> { window.location.href = redirectUrl; }, 600);
       } catch (err) {
-        console.error(err);
-        statusEl.textContent = err.message.replace('Appwrite service error: ', '') || 'Login failed';
+        console.error('Login error:', err);
+        statusEl.textContent = handleAppwriteError(err);
+        statusEl.style.color = 'var(--danger)';
       }
     });
+
+    // Check if user is already logged in
+    async function checkExistingSession() {
+      try {
+        await account.get();
+        // User is already logged in, redirect to dashboard
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        // User not logged in, continue with login page
+      }
+    }
+    
+    checkExistingSession();
   </script>
 </body>
 </html>
