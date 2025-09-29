@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black-bla | Portfolio</title>
+  <meta name="description" content="Black-bla - Software Developer Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <header class="site-header">
+    <div class="logo">&lt;Black-bla /&gt;</div>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <ul class="nav__list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <main id="top" class="main">
+    <section class="hero" id="hero" aria-label="Intro">
+      <div class="hero__content">
+        <h1 class="glitch" data-text="Black-bla">Black-bla</h1>
+        <p class="subtitle typewriter" data-text="Building performant, elegant digital experiences."></p>
+        <div class="hero__actions">
+          <a href="#projects" class="btn primary">View Work</a>
+          <a href="#contact" class="btn outline">Get in Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="wheel"></span>
+      </div>
+    </section>
+
+    <section id="about" class="panel fade-in">
+      <div class="section-header">
+        <h2>About</h2>
+        <p class="section-tag">Who I Am</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text card glass">
+          <p>Hello! I'm <strong>Black-bla</strong>, a developer focused on crafting fast, accessible, and visually delightful web experiences. I love working across the stack, optimizing performance, and bringing ideas to life with clean code and motion design.</p>
+          <p>My approach emphasizes <em>clarity</em>, <em>scalability</em>, and <em>user delight</em>. I thrive in environments where design and engineering intersect.</p>
+        </div>
+        <ul class="stats">
+          <li class="stat"><span class="stat__num" data-count="5">0</span><span class="stat__label">Years Coding</span></li>
+          <li class="stat"><span class="stat__num" data-count="20">0</span><span class="stat__label">Projects</span></li>
+          <li class="stat"><span class="stat__num" data-count="300">0</span><span class="stat__label">Commits</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills" class="panel fade-in">
+      <div class="section-header">
+        <h2>Skills</h2>
+        <p class="section-tag">Stack & Toolbox</p>
+      </div>
+      <div class="chips" role="list">
+        <span class="chip" role="listitem">JavaScript</span>
+        <span class="chip" role="listitem">TypeScript</span>
+        <span class="chip" role="listitem">React</span>
+        <span class="chip" role="listitem">Node.js</span>
+        <span class="chip" role="listitem">CSS / Tailwind</span>
+        <span class="chip" role="listitem">Accessibility</span>
+        <span class="chip" role="listitem">Testing</span>
+        <span class="chip" role="listitem">Performance</span>
+        <span class="chip" role="listitem">Animations</span>
+      </div>
+    </section>
+
+    <section id="projects" class="panel fade-in">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <p class="section-tag">Selected Work</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project card hover-tilt">
+          <div class="project__media skeleton"></div>
+          <h3>Project One</h3>
+          <p class="muted">A brief description of a project that showcases something cool. Performance, design, scalability, etc.</p>
+          <a href="#" class="project__link">Learn more →</a>
+        </article>
+        <article class="project card hover-tilt">
+          <div class="project__media skeleton"></div>
+          <h3>Project Two</h3>
+          <p class="muted">Another project with interesting technical or creative aspects worth highlighting.</p>
+          <a href="#" class="project__link">Learn more →</a>
+        </article>
+        <article class="project card hover-tilt">
+          <div class="project__media skeleton"></div>
+          <h3>Project Three</h3>
+          <p class="muted">A project that emphasizes motion, UX, or API integration.</p>
+          <a href="#" class="project__link">Learn more →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="panel fade-in">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <p class="section-tag">Let's Collaborate</p>
+      </div>
+      <form class="contact-form card glass" netlify name="contact" onsubmit="return false;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="What's up?" required></textarea>
+        </div>
+        <button class="btn primary full" type="submit">Send Message</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Black-bla. Built with semantic HTML, CSS, and vanilla JS.</p>
+    <a href="#top" class="to-top" aria-label="Back to top">↑</a>
+  </footer>
+
+  <script src="assets/js/app.js" type="module"></script>
+</body>
+</html>
