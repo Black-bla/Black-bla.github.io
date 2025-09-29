@@ -21,6 +21,9 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li id="navAuthLogin"><a href="login.html">Login</a></li>
+        <li id="navAuthRegister"><a href="register.html">Register</a></li>
+        <li id="navAuthAccount" class="hidden"><a href="account.html">Account</a></li>
       </ul>
     </nav>
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
@@ -34,6 +37,8 @@
         <div class="hero__actions">
           <a href="#projects" class="btn primary">View Work</a>
           <a href="#contact" class="btn outline">Get in Touch</a>
+          <a href="login.html" id="heroLoginBtn" class="btn outline">Sign In</a>
+          <a href="account.html" id="heroAccountBtn" class="btn primary hidden">Dashboard</a>
         </div>
       </div>
       <div class="scroll-indicator" aria-hidden="true">
@@ -134,5 +139,24 @@
   </footer>
 
   <script src="assets/js/app.js" type="module"></script>
+  <script type="module">
+    // Attempt silent auth check to toggle nav items if Appwrite config present
+    import { account } from './assets/js/appwriteClient.js';
+    async function checkAuth() {
+      try {
+        const user = await account.get();
+        if (user) {
+          document.getElementById('navAuthLogin')?.classList.add('hidden');
+          document.getElementById('navAuthRegister')?.classList.add('hidden');
+          document.getElementById('navAuthAccount')?.classList.remove('hidden');
+          document.getElementById('heroLoginBtn')?.classList.add('hidden');
+          document.getElementById('heroAccountBtn')?.classList.remove('hidden');
+        }
+      } catch (e) {
+        // Not authenticated or Appwrite not configured yet
+      }
+    }
+    checkAuth();
+  </script>
 </body>
 </html>

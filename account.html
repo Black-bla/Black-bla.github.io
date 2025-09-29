@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account | Black-bla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>.account-wrapper{min-height:100svh;display:grid;place-items:center;padding:3rem 1rem}.account-card{width:100%;max-width:640px;display:grid;gap:1.2rem}.account-header{text-align:center;margin-bottom:.5rem}.account-header h1{margin:0 0 .4rem;font-size:2.1rem}.info-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.info-block{padding:1rem .9rem .85rem;border-radius:var(--radius-sm);background:linear-gradient(to bottom right,rgba(255,255,255,0.07),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.15);font-size:.75rem;letter-spacing:.5px;text-transform:uppercase;color:var(--text-soft);display:flex;flex-direction:column;gap:.4rem}.info-block span{font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--text);font-weight:500;word-break:break-all}</style>
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <header class="site-header">
+    <div class="logo"><a href="/" style="text-decoration:none;color:inherit">&lt;Black-bla /&gt;</a></div>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <ul class="nav__list">
+        <li><a href="/">Home</a></li>
+        <li><button id="logoutBtn" class="btn outline" style="padding:.45rem .9rem;font-size:.7rem">Logout</button></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <main class="account-wrapper">
+    <div class="card glass account-card" id="accountCard">
+      <div class="account-header">
+        <h1>Your Account</h1>
+        <p class="muted" style="margin:0" id="welcomeMsg">Loading…</p>
+      </div>
+      <div class="info-grid" id="infoGrid" hidden>
+        <div class="info-block">User ID <span id="infoId">—</span></div>
+        <div class="info-block">Name <span id="infoName">—</span></div>
+        <div class="info-block">Email <span id="infoEmail">—</span></div>
+        <div class="info-block">Status <span id="infoStatus">—</span></div>
+      </div>
+      <div>
+        <h2 style="margin:1.2rem 0 .6rem;font-size:1.1rem">Update Name</h2>
+        <form id="nameForm" class="contact-form" style="padding:0;background:none;border:none;box-shadow:none">
+          <div class="field" style="margin:0">
+            <label for="newName">New Name</label>
+            <input id="newName" name="newName" type="text" minlength="2" />
+          </div>
+          <button class="btn outline" type="submit" style="width:auto">Save</button>
+          <p class="form-status" id="nameStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import './assets/js/app.js';
+    import { account } from './assets/js/appwriteClient.js';
+
+    const welcomeMsg = document.getElementById('welcomeMsg');
+    const infoGrid = document.getElementById('infoGrid');
+    const infoId = document.getElementById('infoId');
+    const infoName = document.getElementById('infoName');
+    const infoEmail = document.getElementById('infoEmail');
+    const infoStatus = document.getElementById('infoStatus');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const nameForm = document.getElementById('nameForm');
+    const nameStatus = document.getElementById('nameStatus');
+
+    async function loadAccount() {
+      try {
+        const user = await account.get();
+        welcomeMsg.textContent = `Welcome, ${user.name || 'friend'} 👋`; 
+        infoId.textContent = user.$id;
+        infoName.textContent = user.name || '—';
+        infoEmail.textContent = user.email;
+        infoStatus.textContent = user.emailVerification ? 'Verified' : 'Unverified';
+        infoGrid.hidden = false;
+      } catch (err) {
+        welcomeMsg.textContent = 'Not authenticated. Redirecting…';
+        setTimeout(()=> { window.location.href = 'login.html'; }, 900);
+      }
+    }
+
+    loadAccount();
+
+    logoutBtn.addEventListener('click', async () => {
+      logoutBtn.disabled = true;
+      logoutBtn.textContent = '…';
+      try {
+        await account.deleteSession('current');
+        window.location.href = 'login.html';
+      } catch (err) {
+        console.error(err);
+        logoutBtn.textContent = 'Error';
+      }
+    });
+
+    nameForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newName = document.getElementById('newName').value.trim();
+      if (!newName) return;
+      nameStatus.textContent = 'Updating…';
+      try {
+        const updated = await account.updateName(newName);
+        infoName.textContent = updated.name;
+        welcomeMsg.textContent = `Welcome, ${updated.name} 👋`;
+        nameStatus.textContent = 'Saved';
+      } catch (err) {
+        console.error(err);
+        nameStatus.textContent = err.message.replace('Appwrite service error: ', '') || 'Update failed';
+      }
+    });
+  </script>
+</body>
+</html>
