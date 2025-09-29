@@ -9,7 +9,6 @@ One-page personal portfolio site with:
 - Stats counters (animated)
 - Responsive mobile navigation
 - Accessible semantic HTML and reduced-motion respect
-- Appwrite authentication (login, register, account dashboard)
 
 ## Structure
 
@@ -18,10 +17,6 @@ index.html              # Main single-page document
 assets/css/style.css    # Core styles (themes, layout, animations)
 assets/js/app.js        # Interactivity + animations + theming
 assets/img/             # (placeholder for images)
-login.html              # Login page (Appwrite Email/Password)
-register.html           # Registration page
-account.html            # Authenticated user dashboard
-assets/js/appwriteClient.js  # Appwrite SDK initialization
 ```
 
 ## Local Preview
@@ -40,14 +35,23 @@ Then open: http://localhost:8000
 - Adjust accent gradient via `--gradient-accent` in `style.css`.
 - Add real form handling (currently a demo) by wiring a backend or service (Netlify Forms, Formspree, etc.).
 - Update stats counts in the `data-count` attributes inside `index.html`.
-- Configure Appwrite: set endpoint + project id in `assets/js/appwriteClient.js`.
-- Secure custom domains / CNAME with Appwrite console to avoid CORS issues.
 
-## Auth (Appwrite) Setup
+## Features
 
-1. Create a project in Appwrite (Cloud or self-hosted).
-2. Go to Web Platforms -> add your site domain (for local dev you can add http://localhost:8000).
-3. Enable Email / Password auth in Auth Providers.
+- **Responsive Design**: Mobile-first approach with smooth animations
+- **Theme Switching**: Dark/light mode with localStorage persistence
+- **Performance Optimized**: Vanilla JavaScript, no heavy frameworks
+- **Accessibility**: Proper ARIA labels, semantic HTML, and reduced motion support
+- **Modern CSS**: Uses CSS custom properties, flexbox, and grid
+- **Interactive Elements**: Hover effects, scroll animations, and particle background
+
+## Browser Support
+
+Works in all modern browsers that support:
+- CSS Custom Properties
+- ES6 Modules
+- Intersection Observer API
+- CSS Grid and Flexbox
 4. (Optional) Enable Email Verification for better security.
 5. In `assets/js/appwriteClient.js` update:
 	- `APPWRITE_ENDPOINT` (e.g. https://cloud.appwrite.io/v1)

@@ -1,162 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Black-bla | Portfolio</title>
-  <meta name="description" content="Black-bla - Software Developer Portfolio" />
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Black-bla - Software Developer Portfolio">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <header class="site-header">
-    <div class="logo">&lt;Black-bla /&gt;</div>
-    <nav class="nav" aria-label="Primary">
-      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">☰</button>
-      <ul class="nav__list">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li id="navAuthLogin"><a href="login.html">Login</a></li>
-        <li id="navAuthRegister"><a href="register.html">Register</a></li>
-        <li id="navAuthDashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-  </header>
-
-  <main id="top" class="main">
-    <section class="hero" id="hero" aria-label="Intro">
-      <div class="hero__content">
-        <h1 class="glitch" data-text="Black-bla">Black-bla</h1>
-        <p class="subtitle typewriter" data-text="Building performant, elegant digital experiences."></p>
-        <div class="hero__actions">
-          <a href="#projects" class="btn primary">View Work</a>
-          <a href="#contact" class="btn outline">Get in Touch</a>
-          <a href="login.html" id="heroLoginBtn" class="btn outline">Sign In</a>
-          <a href="dashboard.html" id="heroAccountBtn" class="btn primary hidden">Dashboard</a>
+  <main>
+    <section class="hero-diagonal">
+      <div class="hero-container">
+        <!-- Left side with background image -->
+        <div class="hero-image-side">
+          <div class="hero-bg-image"></div>
+          <!-- Logo positioned on top-left of image side -->
+          <div class="hero-logo">Black-bla</div>
         </div>
-      </div>
-      <div class="scroll-indicator" aria-hidden="true">
-        <span class="wheel"></span>
+        
+        <!-- Right side with content -->
+        <div class="hero-content-side">
+          <!-- Navigation positioned on top-right -->
+          <nav class="hero-nav">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          
+          <div class="hero-content">
+            <h1 class="hero-title">Welcome to My Portfolio</h1>
+            <p class="hero-subtitle">I'm a developer passionate about creating amazing digital experiences that blend creativity with cutting-edge technology.</p>
+            <a href="#projects" class="hero-btn">View My Work</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="panel fade-in">
-      <div class="section-header">
-        <h2>About</h2>
-        <p class="section-tag">Who I Am</p>
-      </div>
-      <div class="about-grid">
-        <div class="about-text card glass">
-          <p>Hello! I'm <strong>Black-bla</strong>, a developer focused on crafting fast, accessible, and visually delightful web experiences. I love working across the stack, optimizing performance, and bringing ideas to life with clean code and motion design.</p>
-          <p>My approach emphasizes <em>clarity</em>, <em>scalability</em>, and <em>user delight</em>. I thrive in environments where design and engineering intersect.</p>
-        </div>
-        <ul class="stats">
-          <li class="stat"><span class="stat__num" data-count="5">0</span><span class="stat__label">Years Coding</span></li>
-          <li class="stat"><span class="stat__num" data-count="20">0</span><span class="stat__label">Projects</span></li>
-          <li class="stat"><span class="stat__num" data-count="300">0</span><span class="stat__label">Commits</span></li>
-        </ul>
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>I come from a place where opportunities don't fall in your lap — you build them. Web development became my way of building something bigger, and I've been obsessed with turning ideas into live products ever since. My goal is simple: create tools that make life smoother, smarter, and more accessible for people who need it most.</p>
       </div>
     </section>
 
-    <section id="skills" class="panel fade-in">
-      <div class="section-header">
-        <h2>Skills</h2>
-        <p class="section-tag">Stack & Toolbox</p>
-      </div>
-      <div class="chips" role="list">
-        <span class="chip" role="listitem">JavaScript</span>
-        <span class="chip" role="listitem">TypeScript</span>
-        <span class="chip" role="listitem">React</span>
-        <span class="chip" role="listitem">Node.js</span>
-        <span class="chip" role="listitem">CSS / Tailwind</span>
-        <span class="chip" role="listitem">Accessibility</span>
-        <span class="chip" role="listitem">Testing</span>
-        <span class="chip" role="listitem">Performance</span>
-        <span class="chip" role="listitem">Animations</span>
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-card-background" style="background-image: url('assets/images/1.jpeg');"></div>
+            <div class="project-card-overlay"></div>
+            <div class="project-card-content">
+              <h3>E-Commerce Platform</h3>
+              <p>A full-stack e-commerce solution built with React and Node.js, featuring user authentication, payment processing, and inventory management.</p>
+              <a href="#" class="project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-card-background" style="background-image: url('assets/images/2.jpeg');"></div>
+            <div class="project-card-overlay"></div>
+            <div class="project-card-content">
+              <h3>Task Management App</h3>
+              <p>A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
+              <a href="#" class="project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-card-background" style="background-image: url('assets/images/3.jpeg');"></div>
+            <div class="project-card-overlay"></div>
+            <div class="project-card-content">
+              <h3>Weather Dashboard</h3>
+              <p>An interactive weather dashboard with location-based forecasts, data visualization, and weather alerts using modern APIs.</p>
+              <a href="#" class="project-btn">View Project</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="panel fade-in">
-      <div class="section-header">
-        <h2>Projects</h2>
-        <p class="section-tag">Selected Work</p>
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Get In Touch</h2>
+        <p>Let's work together on your next project.</p>
+        <form class="contact-form">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
       </div>
-      <div class="projects-grid">
-        <article class="project card hover-tilt">
-          <div class="project__media skeleton"></div>
-          <h3>Project One</h3>
-          <p class="muted">A brief description of a project that showcases something cool. Performance, design, scalability, etc.</p>
-          <a href="#" class="project__link">Learn more →</a>
-        </article>
-        <article class="project card hover-tilt">
-          <div class="project__media skeleton"></div>
-          <h3>Project Two</h3>
-          <p class="muted">Another project with interesting technical or creative aspects worth highlighting.</p>
-          <a href="#" class="project__link">Learn more →</a>
-        </article>
-        <article class="project card hover-tilt">
-          <div class="project__media skeleton"></div>
-          <h3>Project Three</h3>
-          <p class="muted">A project that emphasizes motion, UX, or API integration.</p>
-          <a href="#" class="project__link">Learn more →</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="panel fade-in">
-      <div class="section-header">
-        <h2>Contact</h2>
-        <p class="section-tag">Let's Collaborate</p>
-      </div>
-      <form class="contact-form card glass" netlify name="contact" onsubmit="return false;">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="What's up?" required></textarea>
-        </div>
-        <button class="btn primary full" type="submit">Send Message</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
-      </form>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© <span id="year"></span> Black-bla. Built with semantic HTML, CSS, and vanilla JS.</p>
-    <a href="#top" class="to-top" aria-label="Back to top">↑</a>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Black-bla. All rights reserved.</p>
+    </div>
   </footer>
 
-  <script src="assets/js/app.js" type="module"></script>
-  <script type="module">
-    // Attempt silent auth check to toggle nav items if Appwrite config present
-    import { account } from './assets/js/appwriteClient.js';
-    async function checkAuth() {
-      try {
-        const user = await account.get();
-        if (user) {
-          document.getElementById('navAuthLogin')?.classList.add('hidden');
-          document.getElementById('navAuthRegister')?.classList.add('hidden');
-          document.getElementById('navAuthDashboard')?.classList.remove('hidden');
-          document.getElementById('heroLoginBtn')?.classList.add('hidden');
-          document.getElementById('heroAccountBtn')?.classList.remove('hidden');
-        }
-      } catch (e) {
-        // Not authenticated or Appwrite not configured yet
-      }
-    }
-    checkAuth();
-  </script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
