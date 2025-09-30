@@ -360,6 +360,40 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Contact section full black background */
+#contact {
+  background: #000;
+  color: #fff;
+  position: relative;
+}
+
+#contact h2 {
+  color: #fff;
+}
+
+#contact p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Dark themed form controls inside contact section */
+#contact .contact-form input,
+#contact .contact-form textarea {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+#contact .contact-form input::placeholder,
+#contact .contact-form textarea::placeholder {
+  color: #888;
+}
+
+#contact .contact-form input:focus,
+#contact .contact-form textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.25);
+}
+
 .section h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
