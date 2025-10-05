@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Subscribe | YDB Custom</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Subscribe and support YDB Custom" />
+  <style>
+    /* Page-local overrides for payment layout */
+    .pay-wrapper { max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+    .pay-header { text-align: center; margin-bottom: 2.5rem; }
+    .pay-header h1 { font-size: 2.25rem; margin: 0 0 0.75rem; }
+    .pay-header p { color: var(--text-light); font-size: 1.05rem; }
+
+    .plan-card { background: #fff; border:1px solid var(--border-color); border-radius: 1rem; padding: 1.75rem 1.75rem 2.25rem; box-shadow: 0 4px 18px rgba(0,0,0,0.06); position: relative; overflow: hidden; }
+    .plan-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 15%, rgba(99,102,241,0.12), transparent 60%); pointer-events: none; }
+    .plan-badge { display:inline-block; background: linear-gradient(135deg,var(--primary-color),#8b5cf6); color:#fff; padding:0.35rem 0.75rem; border-radius: 999px; font-size:0.7rem; letter-spacing:0.06em; font-weight:600; margin-bottom: 1rem; }
+    .plan-price { font-size: 2.25rem; font-weight: 700; margin: 0.25rem 0 1rem; }
+    .plan-price span { font-size: 0.55em; font-weight: 500; color: var(--text-light); }
+    .plan-features { list-style:none; padding:0; margin:0 0 1.5rem; display:grid; gap:0.5rem; }
+    .plan-features li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.95rem; line-height:1.4; }
+    .plan-features li::before { content:"✔"; color: var(--primary-color); font-size:0.85rem; margin-top:0.15rem; }
+
+    .stk-panel { margin-top: 2.5rem; background:#0f172a; color:#fff; border-radius:1rem; padding:1.5rem 1.5rem 1.75rem; position:relative; }
+    .stk-panel h2 { font-size:1.2rem; margin:0 0 0.75rem; }
+    .stk-instructions { font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0 0 1rem; }
+    .stk-grid { display:grid; gap:1rem; }
+    .form-row { display:flex; flex-direction:column; gap:0.4rem; }
+    .form-row label { font-size:0.8rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:#94a3b8; }
+    .form-row input { padding:0.85rem 0.9rem; border:1px solid #334155; background:#1e293b; color:#fff; border-radius:0.6rem; font:inherit; }
+    .form-row input:focus { outline:none; border-color: var(--primary-color); box-shadow:0 0 0 3px rgba(99,102,241,0.25); }
+
+    .pay-actions { margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn-pay { background: linear-gradient(135deg,var(--primary-color),#8b5cf6); color:#fff; padding:0.9rem 1.5rem; border:none; border-radius:0.65rem; font-weight:600; cursor:pointer; font-size:0.95rem; transition: var(--transition); display:inline-flex; align-items:center; gap:0.4rem; }
+    .btn-pay:hover { transform: translateY(-3px); box-shadow:0 10px 25px rgba(99,102,241,0.35); }
+    .btn-secondary { background:#334155; color:#e2e8f0; }
+    .btn-secondary:hover { background:#475569; }
+
+    .status-area { margin-top:1.5rem; background:#1e293b; border:1px solid #334155; padding:1rem 1.1rem; border-radius:0.75rem; display:none; }
+    .status-area.active { display:block; }
+    .status-line { font-size:0.8rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color:#94a3b8; line-height:1.4; }
+    .status-line.ok { color:#10b981; }
+    .status-line.err { color:#f87171; }
+
+    .back-link { display:inline-block; margin: 0 0 1.5rem; font-size:0.85rem; text-decoration:none; color: var(--primary-color); font-weight:600; }
+    .back-link:hover { text-decoration:underline; }
+
+    @media (min-width: 640px){ .stk-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 500px){ .plan-price { font-size:1.9rem; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back to Home</a>
+  <div class="pay-wrapper">
+    <div class="pay-header">
+      <h1>Subscribe & Support</h1>
+      <p>Get priority updates, early access builds, and direct feature suggestions. Payment flow inspired by common M-Pesa STK push patterns.</p>
+    </div>
+
+    <div class="plan-card">
+      <span class="plan-badge">MONTHLY</span>
+      <div class="plan-price">KES 499 <span>/ month</span></div>
+      <ul class="plan-features">
+        <li>Early feature previews</li>
+        <li>Direct feedback channel</li>
+        <li>Priority support responses</li>
+        <li>Access to subscriber-only roadmap notes</li>
+      </ul>
+      <button class="btn-pay" id="initiateStk">Pay with M‑Pesa</button>
+    </div>
+
+    <div class="stk-panel" id="stkPanel">
+      <h2>M‑Pesa STK Push</h2>
+      <p class="stk-instructions">Enter your details and confirm. You'll normally receive a push prompt on your handset to authorize payment. (This demo simulates the sequence.)</p>
+      <div class="stk-grid">
+        <div class="form-row">
+          <label for="phone">Phone (07XXXXXXXX)</label>
+          <input type="tel" id="phone" placeholder="07XXXXXXXX" pattern="^0[0-9]{9}$" required />
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-row">
+          <label for="amount">Amount (KES)</label>
+          <input type="number" id="amount" value="499" min="100" max="10000" required />
+        </div>
+        <div class="form-row">
+          <label for="ref">Reference</label>
+          <input type="text" id="ref" value="YDB-SUB-001" required />
+        </div>
+      </div>
+      <div class="pay-actions">
+        <button class="btn-pay" id="sendPush">Send STK Push</button>
+        <button class="btn-secondary" id="resetForm" type="button">Reset</button>
+      </div>
+      <div class="status-area" id="statusArea" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script>
+    // Simple simulated STK push flow (front-end only mock)
+    const initiateBtn = document.getElementById('initiateStk');
+    const panel = document.getElementById('stkPanel');
+    const sendPushBtn = document.getElementById('sendPush');
+    const resetBtn = document.getElementById('resetForm');
+    const statusArea = document.getElementById('statusArea');
+
+    initiateBtn.addEventListener('click', () => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      panel.classList.add('active');
+      panel.style.outline = '2px solid rgba(99,102,241,0.4)';
+      setTimeout(()=> panel.style.outline='none', 1200);
+    });
+
+    function appendStatus(msg, type='') {
+      statusArea.classList.add('active');
+      const line = document.createElement('div');
+      line.className = 'status-line' + (type ? ' ' + type : '');
+      line.textContent = msg;
+      statusArea.appendChild(line);
+      statusArea.scrollTop = statusArea.scrollHeight;
+    }
+
+    sendPushBtn.addEventListener('click', () => {
+      statusArea.innerHTML = '';
+      const phone = document.getElementById('phone');
+      const email = document.getElementById('email');
+      const amount = document.getElementById('amount');
+      const ref = document.getElementById('ref');
+
+      if (!phone.checkValidity() || !email.checkValidity() || !amount.checkValidity() || !ref.value.trim()) {
+        appendStatus('Validation failed. Please check inputs.', 'err');
+        return;
+      }
+
+      appendStatus('Preparing STK push...');
+      setTimeout(()=> appendStatus('Sending request to payment gateway...'), 700);
+      setTimeout(()=> appendStatus('Awaiting handset authorization...'), 1600);
+      setTimeout(()=> appendStatus('Payment authorized ✅', 'ok'), 2800);
+      setTimeout(()=> appendStatus('Subscription activated. Welcome! 🎉', 'ok'), 3600);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      document.getElementById('phone').value='';
+      document.getElementById('email').value='';
+      document.getElementById('amount').value='499';
+      document.getElementById('ref').value='YDB-SUB-001';
+      statusArea.innerHTML='';
+      statusArea.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

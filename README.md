@@ -6,6 +6,7 @@ Current version: A clean, fast, single‑page personal portfolio built with plai
 * Fullscreen diagonal split hero (left: branded image, right: intro content)
 * Floating logo over the image side
 * Horizontal nav (About / Projects / Contact)
+* Subscription funnel (Subscribe buttons linking to payment page)
 * Animated hero content fade / slide
 * Red "About Me" emphasis section for personal story
 * Image‑background project cards with dark gradient overlays + hover zoom
@@ -23,6 +24,7 @@ index.html               # Main page
 assets/css/style.css     # All styling (layout, hero, cards, responsiveness)
 assets/js/app.js         # Minor interaction hooks / future expansion
 assets/images/           # Hero + project images (1.jpeg,2.jpeg,3.jpeg,image.jpeg)
+ payment.html            # Subscription & simulated M-Pesa style payment flow
 ```
 
 ### 🚀 Run Locally
@@ -48,6 +50,9 @@ Then open: http://localhost:8000
 | Project copy | Edit each `.project-card-content` block |
 | About section color | Change `#about { background: #dc2626; }` in CSS |
 | Accent gradients | Modify linear-gradient in `.hero-title` / `.hero-btn` |
+| Subscription button | Update text or link in nav / hero (`.nav-subscribe`, `.secondary-btn`) |
+| Payment amount | Default amount in `payment.html` input `#amount` |
+| Reference format | Change default `#ref` value in `payment.html` |
 
 ### 📐 Notable CSS Techniques
 * `clip-path: polygon(...)` for diagonal hero boundary
@@ -62,6 +67,7 @@ Then open: http://localhost:8000
 * Add Open Graph / Twitter meta tags
 * Integrate a real contact endpoint (Formspree / Netlify Forms / backend)
 * Fallback system font stack already in place—optionally introduce a display font
+* Hook real M-Pesa STK backend (e.g., Django/Node server calling Daraja API) replacing front-end simulation
 
 ### 🗂 Deployment Notes
 * Designed for GitHub Pages root (repo name matches user domain)
