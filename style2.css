@@ -213,3 +213,21 @@ body {
 .color-preview-2 {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .code-editor {
+    width: 100%;
+    max-width: none;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .editor-content {
+    font-size: 12px;
+  }
+}
