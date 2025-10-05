@@ -247,3 +247,38 @@ body {
     min-height: 70vh;
   }
 }
+
+@media (max-width: 480px) {
+  .terminal-loader {
+    width: calc(100vw - 10px);
+    padding: 0.5em 0.25em;
+    font-size: 0.9em;
+  }
+  .code-editor {
+    width: 95%;
+    max-width: 280px;
+    min-height: 320px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .editor-content {
+    font-size: 11px;
+  }
+  .text {
+    font-size: 11px;
+  }
+  .cards {
+    gap: 15px;
+    margin-top: 30px;
+  }
+  .terminal-header {
+    height: 1.2em;
+    padding: 0 0.3em;
+  }
+  .control {
+    width: 0.5em;
+    height: 0.5em;
+    margin-left: 0.3em;
+  }
+}
