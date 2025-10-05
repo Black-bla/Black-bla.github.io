@@ -3,8 +3,9 @@ body {
     color: #00ff00;
     font-family: 'Courier New', monospace;
     margin: 0;
-    padding: 20px;
-    position: relative;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
 }
 .back-button {
     position: absolute;
@@ -43,19 +44,19 @@ body {
   color: #0f0;
   font-family: "Courier New", Courier, monospace;
   font-size: 1em;
-  padding: 1.5em 1em;
+  padding: 1em 0.5em;
   width: calc(100vw - 40px);
-  height: 70vh;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  height: 100vh;
+  box-shadow: none;
+  border-radius: 0;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 20px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .terminal-header {
@@ -115,6 +116,8 @@ body {
   white-space: nowrap;
   overflow: hidden;
   border-right: 0.2em solid green; /* Cursor */
+  margin-top: 10px;
+  font-size: 12px;
   animation:
     typeAndDelete 4s steps(10) infinite,
     blinkCursor 0.5s step-end infinite alternate;
@@ -123,23 +126,16 @@ body {
 .cards {
   display: flex;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
-.card {
-  width: 140px;
-  height: 220px;
-  background-color: #333;
-  border: 1px solid #555;
-  border-radius: 4px;
-}
-
-/* From Uiverse.io by Yaya12085 */ 
+/* From Uiverse.io by Yaya12085 */
 .code-editor {
-  max-width: 300px;
+  width: 180px;
+  height: auto;
+  min-height: 120px;
   background-color: #1d1e22;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  border-radius: 0;
   padding: 2px;
 }
 
@@ -160,18 +156,16 @@ body {
 
 .icon {
   width: 20px;
-  transition: .2s ease;
-}
-
-.icon:hover {
-  cursor: pointer;
-  border-radius: 50px;
-  background-color: #6e7281;
 }
 
 .editor-content {
   margin: 0 10px 10px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  font-size: 12px;
 }
 
 .property {
@@ -187,7 +181,7 @@ body {
 }
 
 .editor-content .color-1 {
-  color: rgb(182 206 168);
+  color: rgb(206 145 120);
 }
 
 .editor-content .color-2 {
@@ -195,7 +189,16 @@ body {
 }
 
 .editor-content .color-3 {
-  color: rgb(207 146 120);
+  color: rgb(220 220 170);
+}
+
+.price-link {
+  align-self: flex-end;
+  color: #0f0;
+  text-decoration: none;
+  border-right: 0.2em solid #0f0;
+  animation: blinkCursor 0.5s step-end infinite alternate;
+  font-size: 12px;
 }
 
 .color-preview-1,.color-preview-2 {
@@ -214,20 +217,33 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.terminal-content {
+  overflow: hidden;
+  height: calc(100% - 3em);
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .cards {
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+    align-items: center;
   }
   .code-editor {
-    width: 100%;
-    max-width: none;
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    min-height: 360px;
   }
   .title {
-    font-size: 12px;
+    font-size: 14px;
   }
   .editor-content {
     font-size: 12px;
+  }
+  .terminal-loader {
+    width: calc(100vw - 20px);
+    height: auto;
+    min-height: 70vh;
   }
 }
