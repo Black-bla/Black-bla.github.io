@@ -5,7 +5,7 @@ import { useRef } from 'react';
 // `src/assets/models/workspace-items/about.glb` — Vite will return a URL string.
 // The model file present in the repo is named `ABOUT.glb` (uppercase).
 // Import using the exact filename so Vite resolves it correctly.
-import aboutGLB from '../../assets/models/workspace-items/about.glb';
+import aboutGLB from '../../assets/models/workspace-items/ABOUT.glb';
 
 export default function AboutZone() {
   const group = useRef();
