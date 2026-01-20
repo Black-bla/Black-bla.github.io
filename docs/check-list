@@ -1,0 +1,474 @@
+# Infinite Canvas Portfolio - Development Checklist
+
+## Phase 1: Foundation & Setup ⚙️
+- [x] Initialize React project with Vite
+- [x] Install all dependencies (Three.js, R3F, Drei, GSAP, Tailwind)
+- [x] Configure Tailwind CSS
+- [x] Set up project folder structure (all folders in src/)
+- [x] Create constants.js with SECTION_POSITIONS
+- [x] Create basic data files (projects.js, skills.js, experience.js, about.js)
+- [x] Test that app runs with basic "Hello World"
+
+---
+
+## Phase 2: Basic Canvas & Camera System 📹
+- [ ] Create MainCanvas.jsx with basic R3F Canvas setup
+- [ ] Implement CameraController.jsx component
+- [ ] Create useCamera.js hook with camera state management
+- [ ] Implement flyToSection() function with GSAP animation
+- [ ] Add camera lookAt functionality to focus on sections
+- [ ] Test camera movement between at least 2 positions
+- [ ] Add smooth easing to camera transitions (power2.inOut)
+- [ ] Verify camera ref is working correctly
+
+---
+
+## Phase 3: Center Hub Section 🏠
+- [ ] Create CenterHub.jsx component
+- [ ] Add 3D text for name using Text3D from Drei
+- [ ] Implement gradient/emissive material for name
+- [ ] Create orbiting particle system around name (1000+ particles)
+- [ ] Animate particles in useFrame (rotation + gentle movement)
+- [ ] Add HTML overlay tagline below 3D name
+- [ ] Test that hub renders at position [0, 0, 0]
+- [ ] Verify particles don't impact performance
+
+---
+
+## Phase 4: Portal Gateway System 🌀
+- [ ] Create PortalGateways.jsx component
+- [ ] Create individual PortalRing.jsx component
+- [ ] Render 5 torus geometries positioned in circle around hub
+- [ ] Add emissive materials with unique colors per portal
+- [ ] Implement rotation animation for each portal
+- [ ] Add hover effect (scale up, increase emissive)
+- [ ] Implement click handler to trigger flyToSection()
+- [ ] Add portal labels using Html component
+- [ ] Test navigation from hub to each section via portals
+
+---
+
+## Phase 5: Mini-Map Navigation 🗺️
+- [ ] Create MiniMap.jsx component
+- [ ] Style circular radar container with glassmorphism
+- [ ] Calculate and position section dots around circle
+- [ ] Add center dot representing current position
+- [ ] Implement pulsing animation for dots (scale 1 → 1.2)
+- [ ] Add click handlers to navigate to sections
+- [ ] Show section names on hover
+- [ ] Position mini-map in bottom-right corner
+- [ ] Test navigation from mini-map to all sections
+- [ ] Make responsive for mobile (larger, centered)
+
+---
+
+## Phase 6: Projects Quadrant Section 🎨
+- [ ] Create ProjectsQuadrant.jsx component at position [50, 0, 0]
+- [ ] Create ProjectCard3D.jsx component
+- [ ] Implement plane geometry for each card
+- [ ] Add video texture support for project previews
+- [ ] Position 6-8 cards at varying Z-depths
+- [ ] Add HTML overlay for card title and tech stack
+- [ ] Implement hover effects (scale, z-position change, glow)
+- [ ] Add click handler to expand card to center
+- [ ] Create FocusModal.jsx for expanded project view
+- [ ] Add image gallery in modal
+- [ ] Add "Visit Site" and "GitHub" buttons in modal
+- [ ] Implement close modal functionality
+- [ ] Add fade effect to other cards when one is selected
+- [ ] Test smooth transitions and interactions
+
+---
+
+## Phase 7: About Zone Section 👤
+- [ ] Create AboutZone.jsx component at position [-50, 0, 0]
+- [ ] Model desk using box geometries
+- [ ] Add computer model (monitor + keyboard)
+- [ ] Create interactive book object
+- [ ] Implement book opening animation on click
+- [ ] Add bio text overlay when book opens
+- [ ] Create coffee cup with steam particles
+- [ ] Add floating photo frames above desk
+- [ ] Implement photo click to enlarge with caption
+- [ ] Add desk lamp with point light
+- [ ] Make lamp toggleable on click
+- [ ] Set camera angle for best view of workspace
+- [ ] Add warm lighting atmosphere
+- [ ] Test all interactive objects
+
+---
+
+## Phase 8: Skills Constellation Section 💡
+- [ ] Create SkillsConstellation.jsx at position [0, 50, 0]
+- [ ] Create SkillOrb.jsx component
+- [ ] Generate 20-30 orbs in spherical distribution
+- [ ] Size orbs based on skill level (0.5 - 1.5 radius)
+- [ ] Add emissive materials with unique colors
+- [ ] Implement pulsing animation for orbs
+- [ ] Add skill name labels using Html
+- [ ] Create connection lines between related skills
+- [ ] Show connections only when hovering an orb
+- [ ] Add OrbitControls for rotation (limited to rotation only)
+- [ ] Test smooth rotation and hover interactions
+- [ ] Verify performance with all orbs rendering
+
+---
+
+## Phase 9: Timeline Dimension Section 📅
+- [ ] Create TimelineDimension.jsx at position [0, -50, 0]
+- [ ] Create glowing path line extending downward (Y-axis)
+- [ ] Create TimelineMarker.jsx component
+- [ ] Position markers along path for each experience
+- [ ] Add glowing sphere at each marker
+- [ ] Create connecting lines from markers to path
+- [ ] Add HTML info cards for each job/milestone
+- [ ] Style cards with glassmorphism and borders
+- [ ] Implement camera animation along timeline path
+- [ ] Add progressive reveal (past markers bright, future dimmed)
+- [ ] Test smooth camera movement along timeline
+- [ ] Verify all milestone data displays correctly
+
+---
+
+## Phase 10: Contact Portal Section 📬
+- [ ] Create ContactPortal.jsx at position [0, 0, 50]
+- [ ] Implement vortex particle spiral effect
+- [ ] Animate particles spiraling inward
+- [ ] Add rotation animation to vortex
+- [ ] Create contact form with HTML overlay
+- [ ] Style form with glassmorphism
+- [ ] Add input fields (name, email, message)
+- [ ] Style submit button with gradient
+- [ ] Add form validation
+- [ ] Implement form submission (or placeholder)
+- [ ] Create orbiting social link spheres
+- [ ] Add click handlers to open social URLs
+- [ ] Add hover effects to social spheres
+- [ ] Test form and all interactions
+
+---
+
+## Phase 11: Global Particle System ✨
+- [ ] Create ParticleSystem.jsx component
+- [ ] Generate 5000 particles in large volume (200x200x200)
+- [ ] Add Points geometry with buffer attributes
+- [ ] Implement gentle drifting animation in useFrame
+- [ ] Add cursor influence (particles move away from cursor)
+- [ ] Adjust particle opacity and size
+- [ ] Test performance impact
+- [ ] Optimize if needed (reduce count on mobile)
+
+---
+
+## Phase 12: Background & Atmosphere 🌌
+- [ ] Create BackgroundVoid.jsx component
+- [ ] Add large sphere (500 unit radius) enclosing scene
+- [ ] Create custom shader material for background
+- [ ] Write void.vert vertex shader
+- [ ] Write void.frag fragment shader with gradient
+- [ ] Add animated wave/noise pattern to shader
+- [ ] Update uTime uniform in useFrame
+- [ ] Render sphere with BackSide material
+- [ ] Test visual appearance and performance
+
+---
+
+## Phase 13: Lighting System 💡
+- [ ] Create LightingRig.jsx component
+- [ ] Add ambient light (low intensity)
+- [ ] Add 2-3 point lights with colored tints
+- [ ] Add spotlight for dramatic effect
+- [ ] Enable shadows on spotlight
+- [ ] Test lighting across all sections
+- [ ] Adjust intensities for best visual balance
+- [ ] Ensure each section is well-lit
+
+---
+
+## Phase 14: Time-of-Day System 🌅
+- [ ] Create useTimeOfDay.js hook
+- [ ] Implement getTimeOfDay() function based on system time
+- [ ] Define color palettes for morning/afternoon/evening/night
+- [ ] Apply palettes to background shader uniforms
+- [ ] Adjust light intensities per time of day
+- [ ] Add smooth transitions between time periods
+- [ ] Create manual toggle in settings (optional)
+- [ ] Test at different times or manually change system time
+
+---
+
+## Phase 15: User Interactions & Raycasting 🖱️
+- [ ] Create useMousePosition.js hook
+- [ ] Track mouse position in normalized device coordinates
+- [ ] Create useIntersect.js hook for raycasting
+- [ ] Implement click detection on 3D objects
+- [ ] Test hover effects on various objects
+- [ ] Verify click handlers work on all interactive elements
+- [ ] Add visual feedback for clickable objects
+- [ ] Test on multiple sections
+
+---
+
+## Phase 16: Custom Cursor 👆
+- [ ] Create CustomCursor.jsx component
+- [ ] Style as circular outline with border
+- [ ] Position using fixed positioning and transform
+- [ ] Track mouse position and update in real-time
+- [ ] Add smooth following animation (CSS transition)
+- [ ] Scale up when hovering interactive elements
+- [ ] Add mix-blend-mode for visibility on all backgrounds
+- [ ] Hide default cursor globally
+- [ ] Test cursor on all sections and interactions
+
+---
+
+## Phase 17: Loading Sequence 🔄
+- [ ] Create LoadingSequence.jsx component
+- [ ] Design full-screen overlay with dark background
+- [ ] Add animated title text
+- [ ] Create progress bar with gradient fill
+- [ ] Implement loading progress state (0-100%)
+- [ ] Simulate loading with timer or actual asset loading
+- [ ] Add GSAP fade-out animation when complete
+- [ ] Remove from DOM after fade
+- [ ] Show loading only on initial page load
+- [ ] Test that loading blocks interaction until complete
+
+---
+
+## Phase 18: Settings Panel ⚙️
+- [ ] Create SettingsPanel.jsx component
+- [ ] Add floating button in top-right corner
+- [ ] Style button with glassmorphism
+- [ ] Create expandable panel dropdown
+- [ ] Add sound effects toggle
+- [ ] Add auto time-of-day toggle
+- [ ] Add "Return to Hub" button
+- [ ] Implement all toggle handlers
+- [ ] Store settings in state or localStorage
+- [ ] Add smooth expand/collapse animation
+- [ ] Test all settings functionality
+
+---
+
+## Phase 19: Sound System 🔊
+- [ ] Create SoundEffects.jsx component
+- [ ] Add audio files to assets/sounds/
+- [ ] Load whoosh.mp3, chime.mp3, ambient.mp3
+- [ ] Create playSound() function
+- [ ] Trigger whoosh on camera transitions
+- [ ] Trigger chime on object clicks
+- [ ] Loop ambient sound at low volume
+- [ ] Respect sound toggle from settings
+- [ ] Preload sounds for smooth playback
+- [ ] Test sounds don't overlap harshly
+- [ ] Add mute on mobile (optional)
+
+---
+
+## Phase 20: Post-Processing Effects 🎭
+- [ ] Install @react-three/postprocessing
+- [ ] Add EffectComposer to Canvas
+- [ ] Implement Bloom effect (subtle glow)
+- [ ] Adjust bloom intensity and threshold
+- [ ] Add ChromaticAberration effect (minimal)
+- [ ] Test performance impact
+- [ ] Make effects toggleable for low-end devices
+- [ ] Verify effects enhance visuals without overdoing
+
+---
+
+## Phase 21: Mobile Optimizations 📱
+- [ ] Create useGestures.js hook
+- [ ] Implement touch event handlers (touchStart, touchMove)
+- [ ] Add swipe to pan camera
+- [ ] Add pinch to zoom functionality
+- [ ] Reduce particle count on mobile (detect with useMediaQuery)
+- [ ] Simplify shaders or disable on mobile
+- [ ] Make mini-map larger and centered on mobile
+- [ ] Test all sections on mobile device
+- [ ] Verify performance is smooth (30+ fps)
+- [ ] Adjust UI sizes for smaller screens
+
+---
+
+## Phase 22: Context & State Management 🗂️
+- [ ] Create SceneContext.jsx
+- [ ] Store camera state globally
+- [ ] Create NavigationContext.jsx
+- [ ] Track currentSection globally
+- [ ] Create SettingsContext.jsx
+- [ ] Store soundEnabled, timeOfDay settings
+- [ ] Wrap App with all context providers
+- [ ] Replace local state with context where needed
+- [ ] Test state updates across components
+
+---
+
+## Phase 23: Data Integration 📊
+- [ ] Fill projects.js with real project data
+- [ ] Add project videos/images to assets
+- [ ] Fill skills.js with complete skill list
+- [ ] Define skill relationships in data
+- [ ] Fill experience.js with work history
+- [ ] Fill about.js with bio, photos, interests
+- [ ] Fill socialLinks.js with actual URLs
+- [ ] Connect all components to data files
+- [ ] Test dynamic rendering from data
+- [ ] Verify all content displays correctly
+
+---
+
+## Phase 24: Performance Optimization ⚡
+- [ ] Implement React.lazy() for section components
+- [ ] Add Suspense wrappers with fallbacks
+- [ ] Use useCallback for expensive functions
+- [ ] Use useMemo for computed values
+- [ ] Implement Instances for repeated geometries
+- [ ] Add LOD (Level of Detail) for complex models
+- [ ] Enable texture compression (KTX2)
+- [ ] Test with Chrome DevTools Performance tab
+- [ ] Monitor FPS across all sections
+- [ ] Optimize until 60fps on desktop, 30fps on mobile
+
+---
+
+## Phase 25: Polish & Micro-interactions ✨
+- [ ] Add entrance animations for each section
+- [ ] Add exit animations when leaving sections
+- [ ] Implement smooth scroll reveal for HTML elements
+- [ ] Add number counter animations for stats
+- [ ] Add hover wobble to interactive objects
+- [ ] Add ripple effect on click in empty space
+- [ ] Add screen shake on significant interactions (subtle)
+- [ ] Add glow pulse to important elements
+- [ ] Test all animations are smooth
+- [ ] Ensure no janky movements
+
+---
+
+## Phase 26: Easter Eggs & Special Features 🎁
+- [ ] Add hidden objects floating in space
+- [ ] Create discovery system for finding all eggs
+- [ ] Add shooting star that occasionally crosses screen
+- [ ] Implement guest book sphere
+- [ ] Add ability to leave messages on guest book
+- [ ] Display messages on sphere surface
+- [ ] Add subtle secrets in About Zone objects
+- [ ] Create achievement system (optional)
+- [ ] Test all easter eggs are findable
+
+---
+
+## Phase 27: Accessibility & UX Improvements ♿
+- [ ] Add keyboard navigation (arrow keys, tab)
+- [ ] Add "Skip to Section" keyboard shortcuts
+- [ ] Ensure all interactive elements have focus states
+- [ ] Add ARIA labels where appropriate
+- [ ] Test with screen readers
+- [ ] Add reduce-motion preference detection
+- [ ] Simplify animations for users with motion sensitivity
+- [ ] Add alt text to images
+- [ ] Ensure color contrast meets WCAG standards
+- [ ] Add loading indicators for slow connections
+
+---
+
+## Phase 28: Cross-Browser Testing 🌐
+- [ ] Test in Chrome (desktop & mobile)
+- [ ] Test in Firefox (desktop & mobile)
+- [ ] Test in Safari (desktop & mobile)
+- [ ] Test in Edge
+- [ ] Fix any browser-specific bugs
+- [ ] Verify WebGL support detection
+- [ ] Add fallback message for unsupported browsers
+- [ ] Test on various screen sizes (320px to 4K)
+- [ ] Verify touch interactions on tablets
+
+---
+
+## Phase 29: Final Integration & Bug Fixes 🐛
+- [ ] Test complete user journey from load to contact
+- [ ] Navigate to every section from every other section
+- [ ] Test all interactive elements in all sections
+- [ ] Fix any transition glitches
+- [ ] Fix any z-fighting or rendering issues
+- [ ] Ensure no memory leaks (check with DevTools)
+- [ ] Verify proper cleanup on unmount
+- [ ] Test with slow network (throttling)
+- [ ] Fix any asset loading issues
+- [ ] Polish any rough edges
+
+---
+
+## Phase 30: Deployment Preparation 🚀
+- [ ] Optimize production build
+- [ ] Compress all images and videos
+- [ ] Minify code
+- [ ] Set up environment variables
+- [ ] Configure CDN for assets (if using)
+- [ ] Test production build locally
+- [ ] Set up analytics (optional)
+- [ ] Create custom 404 page
+- [ ] Set up proper meta tags and SEO
+- [ ] Create Open Graph images
+- [ ] Add favicon and app icons
+- [ ] Write README.md documentation
+
+---
+
+## Phase 31: Launch & Post-Launch 🎉
+- [ ] Deploy to hosting (Vercel, Netlify, etc.)
+- [ ] Test deployed version on multiple devices
+- [ ] Share with friends/colleagues for feedback
+- [ ] Fix any issues discovered in production
+- [ ] Monitor performance metrics
+- [ ] Monitor error logs
+- [ ] Add any requested features
+- [ ] Create portfolio case study about building this
+- [ ] Share on social media
+- [ ] Celebrate! 🎊
+
+---
+
+## Optional Enhancements 🌟
+- [ ] Add blog section with floating article cards
+- [ ] Implement real-time collaboration (multiple cursors)
+- [ ] Add WebRTC video chat in Contact section
+- [ ] Create admin panel to update content
+- [ ] Add dark/light mode toggle (if not using time-of-day)
+- [ ] Integrate with CMS for dynamic content
+- [ ] Add analytics dashboard
+- [ ] Create VR mode support
+- [ ] Add more easter eggs based on user feedback
+- [ ] Implement multiplayer guest book interaction
+
+---
+
+## Maintenance Checklist 🔧
+- [ ] Set up automated backups
+- [ ] Schedule regular dependency updates
+- [ ] Monitor site performance monthly
+- [ ] Update portfolio content regularly
+- [ ] Refresh project showcases
+- [ ] Add new skills as learned
+- [ ] Keep experience timeline current
+- [ ] Review and respond to guest book messages
+- [ ] Check for broken links
+- [ ] Optimize based on user analytics
+
+---
+
+**Total Estimated Time:** 60-80 hours for complete implementation
+**Recommended Approach:** Complete 2-3 phases per coding session
+**Priority Order:** Phases 1-18 are core functionality, 19-31 are polish and launch
+
+---
+
+## Notes for Using with Copilot:
+- Complete each phase in order
+- Test thoroughly before moving to next phase
+- Take breaks between major phases
+- Document any deviations or custom solutions
+- Keep Git commits aligned with phase completions
+- Reference this checklist in prompts: "I'm working on Phase X: [Phase Name]"

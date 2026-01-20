@@ -1,80 +1,90 @@
-## Black-bla.github.io
+# React + TypeScript + Vite
 
-Current version: A clean, fast, single‑page personal portfolio built with plain HTML, CSS, and a little vanilla JavaScript.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### 🔥 Key Visual Elements
-* Fullscreen diagonal split hero (left: branded image, right: intro content)
-* Floating logo over the image side
-* Horizontal nav (About / Projects / Contact)
-* Subscription funnel (Subscribe buttons linking to payment page)
-* Animated hero content fade / slide
-* Red "About Me" emphasis section for personal story
-* Image‑background project cards with dark gradient overlays + hover zoom
-* Responsive layout: stacks gracefully on mobile
+Currently, two official plugins are available:
 
-### ✅ What Was Removed (Legacy Features No Longer Present)
-* Authentication / account pages
-* Theme toggle (light/dark)
-* Glitch / typewriter / particle experimental effects
-* Stats counters & scroll reveal utilities
 
-### 📁 Structure
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-index.html               # Main page
-assets/css/style.css     # All styling (layout, hero, cards, responsiveness)
-assets/js/app.js         # Minor interaction hooks / future expansion
-assets/images/           # Hero + project images (1.jpeg,2.jpeg,3.jpeg,image.jpeg)
- payment.html            # Subscription & simulated M-Pesa style payment flow
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-### 🚀 Run Locally
-Any static server works. Examples:
+## Recent Changes (Dev)
 
-Python:
+- Added an "Infinite Canvas" hub experience: 3D canvas, center hub, portals, particle background, and mini-map navigation.
+- Replaced the placeholder About card with optional GLB loading from `src/assets/models/workspace-items/about.glb`. The app will fall back to a card if the GLB isn't present.
+- Improved navigation UX: home button, active portal highlighting, connecting lines, and smart camera positioning via `useCamera` (GSAP animations).
+- New components added/updated: `CenterHub`, `PortalGateways`, `ParticleSystem`, `LightingRig`, `MiniMap`, plus section placeholders `ProjectsQuadrant`, `AboutZone`, `SkillsConstellation`, `TimelineDimension`, `ContactPortal`.
+
+How to use the GLB model:
+- Place your model at `src/assets/models/workspace-items/about.glb` and open the About portal. If you use a different filename, update the path in `src/components/Sections/AboutZone.jsx`.
+
+To run locally:
+```bash
+npm install
+npm run dev
 ```
-python -m http.server 8000
-```
-Node (npx serve):
-```
-npx serve .
-```
-Then open: http://localhost:8000
 
-### 🛠 Customize
-| Area | How |
-|------|-----|
-| Hero background | Replace `assets/images/image.jpeg` or adjust `.hero-bg-image` CSS |
-| Logo text | Edit the `.hero-logo` div in `index.html` |
-| Diagonal shape | Tweak `clip-path` in `.hero-image-side` |
-| Project images | Replace `assets/images/1.jpeg` etc. |
-| Project copy | Edit each `.project-card-content` block |
-| About section color | Change `#about { background: #dc2626; }` in CSS |
-| Accent gradients | Modify linear-gradient in `.hero-title` / `.hero-btn` |
-| Subscription button | Update text or link in nav / hero (`.nav-subscribe`, `.secondary-btn`) |
-| Payment amount | Default amount in `payment.html` input `#amount` |
-| Reference format | Change default `#ref` value in `payment.html` |
-
-### 📐 Notable CSS Techniques
-* `clip-path: polygon(...)` for diagonal hero boundary
-* CSS custom properties for theme tokens (colors, spacing, shadow)
-* Layered background image + overlay gradients for project cards
-* Keyframe animations for hero entrance
-* Responsive grid with `repeat(auto-fit, minmax())`
-
-### 🧪 Suggested Next Enhancements
-* Add a lightweight accessibility pass (skip link, focus styles refinement)
-* Lazy‑load project images (`loading="lazy"`)
-* Add Open Graph / Twitter meta tags
-* Integrate a real contact endpoint (Formspree / Netlify Forms / backend)
-* Fallback system font stack already in place—optionally introduce a display font
-* Hook real M-Pesa STK backend (e.g., Django/Node server calling Daraja API) replacing front-end simulation
-
-### 🗂 Deployment Notes
-* Designed for GitHub Pages root (repo name matches user domain)
-* If styles appear missing after deploy: hard reload (Ctrl+F5) or append `?v=1` to stylesheet URL due to page caching
-
-### 📄 License
-MIT (feel free to adapt). Add a LICENSE file if you want explicit redistribution terms.
-
----
-Built lean on purpose: no framework, minimal JS, strong visuals.
