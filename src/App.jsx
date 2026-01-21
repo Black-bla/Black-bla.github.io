@@ -12,6 +12,9 @@ import LightingRig from './components/Effects/LightingRig';
 import MiniMap from './components/Navigation/MiniMap';
 import useCamera from './hooks/useCamera';
 import './styles/globals.css';
+import HolographicGrid from './components/Effects/HolographicGrid';
+import DataStreams from './components/Effects/DataStreams';
+import PostProcessing from './components/Canvas/PostProcessing';
 
 export default function App() {
   const { cameraRef, flyToSection, currentSection } = useCamera();
@@ -103,6 +106,8 @@ export default function App() {
         <CameraController cameraRef={cameraRef} section={currentSection} />
         <LightingRig />
         <ParticleSystem />
+        <HolographicGrid />
+        <DataStreams count={30} />
         <CenterHub />
         <PortalGateways onPortalClick={flyToSection} currentSection={currentSection} />
         <ProjectsQuadrant />
@@ -110,6 +115,7 @@ export default function App() {
         <SkillsConstellation />
         <TimelineDimension />
         <ContactPortal />
+        <PostProcessing />
       </MainCanvas>
     </>
   );
