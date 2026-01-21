@@ -1,7 +1,7 @@
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Scanline, Glitch, Noise } from '@react-three/postprocessing';
 import { BlendFunction, GlitchMode } from 'postprocessing';
 
-export default function PostProcessing() {
+export default function PostProcessingFX() {
   return (
     <EffectComposer multisampling={4}>
       <Bloom intensity={2} luminanceThreshold={0.15} luminanceSmoothing={0.9} radius={0.85} mipmapBlur />
@@ -17,8 +17,4 @@ export default function PostProcessing() {
       <Noise opacity={0.08} blendFunction={BlendFunction.SOFT_LIGHT} />
     </EffectComposer>
   );
-}
-// Bloom, effects, etc.
-export default function PostProcessing() {
-  return null;
 }
