@@ -12,6 +12,7 @@ import LightingRig from './components/Effects/LightingRig';
 import MiniMap from './components/Navigation/MiniMap';
 import useCamera from './hooks/useCamera';
 import './styles/globals.css';
+import ErrorBoundary from './components/Shared/ErrorBoundary';
 import HolographicGrid from './components/Effects/HolographicGrid';
 import DataStreams from './components/Effects/DataStreams';
 import PostProcessing from './components/Canvas/PostProcessing';
@@ -20,7 +21,8 @@ export default function App() {
   const { cameraRef, flyToSection, currentSection } = useCamera();
 
   return (
-    <>
+    <ErrorBoundary>
+      <>
       {/* Mini-map navigation */}
       <MiniMap currentSection={currentSection} onNavigate={flyToSection} />
       
@@ -102,6 +104,10 @@ export default function App() {
         </div>
       )}
 
+      <div style={{ position: 'fixed', top: 12, left: 12, zIndex: 200, padding: '6px 10px', background: 'rgba(255,0,0,0.08)', color: '#fff', borderRadius: 8, fontSize: '0.9rem', fontWeight: 600 }}>
+        Debug: App mounted
+      </div>
+
       <MainCanvas>
         <CameraController cameraRef={cameraRef} section={currentSection} />
         <LightingRig />
@@ -117,6 +123,7 @@ export default function App() {
         <ContactPortal />
         <PostProcessing />
       </MainCanvas>
-    </>
+      </>
+    </ErrorBoundary>
   );
 }

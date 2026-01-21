@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import { Environment, Stars, PerspectiveCamera, Preload } from '@react-three/drei';
+import { Environment, Stars, PerspectiveCamera, Preload, OrbitControls } from '@react-three/drei';
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 
@@ -14,7 +14,7 @@ export default function MainCanvas({ children }) {
         top: 0,
         left: 0,
         zIndex: 0,
-        background: '#000000'
+        background: 'linear-gradient(to bottom, #0a0e27 0%, #1a1a2e 50%, #16213e 100%)'
       }}
       gl={{
         antialias: true,
@@ -45,48 +45,6 @@ export default function MainCanvas({ children }) {
 
         {children}
 
-        <Preload all />
-      </Suspense>
-
-      <EffectComposer>
-        <Bloom intensity={1.5} luminanceThreshold={0.2} luminanceSmoothing={0.9} mipmapBlur />
-
-        <ChromaticAberration offset={[0.002, 0.002]} radialModulation modulationOffset={0.5} />
-
-        <Vignette offset={0.3} darkness={0.5} eskil={false} blendFunction={BlendFunction.NORMAL} />
-
-        <Noise opacity={0.05} blendFunction={BlendFunction.OVERLAY} />
-      </EffectComposer>
-    </Canvas>
-  );
-}
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
-import { OrbitControls } from '@react-three/drei';
-
-export default function MainCanvas({ children }) {
-  return (
-    <Canvas
-      style={{ 
-        width: '100vw', 
-        height: '100vh', 
-        position: 'fixed', 
-        top: 0, 
-        left: 0, 
-        zIndex: 0, 
-        background: 'linear-gradient(to bottom, #0a0e27 0%, #1a1a2e 50%, #16213e 100%)'
-      }}
-      gl={{ 
-        antialias: true, 
-        alpha: false, 
-        powerPreference: 'high-performance'
-      }}
-      camera={{ position: [0, 5, 30], fov: 75, near: 0.1, far: 1000 }}
-      shadows
-    >
-      <Suspense fallback={null}>
-        {children}
-        {/* Add orbit controls for panning and rotation */}
         <OrbitControls
           enableZoom={true}
           enablePan={true}
@@ -99,7 +57,19 @@ export default function MainCanvas({ children }) {
           rotateSpeed={0.5}
           panSpeed={0.5}
         />
+
+        <Preload all />
       </Suspense>
+
+      <EffectComposer>
+        <Bloom intensity={1.5} luminanceThreshold={0.2} luminanceSmoothing={0.9} mipmapBlur />
+
+        <ChromaticAberration offset={[0.002, 0.002]} radialModulation modulationOffset={0.5} />
+
+        <Vignette offset={0.3} darkness={0.5} eskil={false} blendFunction={BlendFunction.NORMAL} />
+
+        <Noise opacity={0.05} blendFunction={BlendFunction.OVERLAY} />
+      </EffectComposer>
     </Canvas>
   );
 }
