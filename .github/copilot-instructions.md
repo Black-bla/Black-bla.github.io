@@ -28,13 +28,21 @@
 ## Patterns & Conventions
 - **React 19, modern idioms:** Use function components, hooks, and context. No class components.
 - **TypeScript:** Use `.ts`/`.tsx` for new files unless working with legacy `.js`/`.jsx`.
+  - **Note:** ESLint is configured to only check `.ts`/`.tsx` files (see `eslint.config.js`). `.js`/`.jsx` files won't be linted.
 - **Three.js via R3F:** All 3D scene logic uses @react-three/fiber and @react-three/drei. Canvas setup in `MainCanvas.jsx`.
   - **CRITICAL:** Import `useFrame` from `@react-three/fiber`, NOT `@react-three/drei`.
-  - Import 3D helpers (PerspectiveCamera, Html, OrbitControls, etc.) from `@react-three/drei`.
+  - Import 3D helpers (PerspectiveCamera, Html, OrbitControls, Text, Float, Stars, etc.) from `@react-three/drei`.
+  - Post-processing effects (Bloom, ChromaticAberration, Vignette, Noise) from `@react-three/postprocessing`.
   - All R3F components must be children of `<Canvas>` in `MainCanvas.jsx`.
+  - Example pattern:
+    ```jsx
+    import { useFrame } from '@react-three/fiber';
+    import { Html, Text, Float } from '@react-three/drei';
+    ```
 - **Camera/Navigation:**
   - Use `useCamera` for camera state and GSAP-powered transitions (`flyToSection`).
-  - Camera always looks at the current section's position (see `CameraController.jsx`).
+  - Camera position is animated via GSAP in `useCamera.js`, but `lookAt` is updated every frame in `CameraController.jsx` to focus on the current section.
+  - Example: `flyToSection('projects')` triggers GSAP animation + updates `currentSection` state.
 - **Section/Component Structure:**
   - Each major zone (hub, projects, about, etc.) is a separate component in `src/components/Sections/`.
   - Reusable 3D elements in `src/components/Elements/`.

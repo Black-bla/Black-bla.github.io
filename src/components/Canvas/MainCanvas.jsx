@@ -28,38 +28,38 @@ export default function MainCanvas({ children }) {
     >
       <PerspectiveCamera makeDefault position={[0, 5, 30]} fov={75} />
 
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.1} color="#0a0e27" />
+      {/* Non-suspending scene primitives: render immediately so the canvas isn't blank while models load */}
+      <ambientLight intensity={0.1} color="#0a0e27" />
 
-        <directionalLight position={[10, 10, 5]} intensity={1.5} color="#00ffff" castShadow shadow-mapSize={[2048, 2048]} />
+      <directionalLight position={[10, 10, 5]} intensity={1.5} color="#00ffff" castShadow shadow-mapSize={[2048, 2048]} />
 
-        <directionalLight position={[-10, 5, -5]} intensity={1} color="#ff00ff" />
+      <directionalLight position={[-10, 5, -5]} intensity={1} color="#ff00ff" />
 
-        <pointLight position={[0, -10, 0]} intensity={0.5} color="#4a9eff" distance={50} />
+      <pointLight position={[0, -10, 0]} intensity={0.5} color="#4a9eff" distance={50} />
 
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={0.5} />
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={0.5} />
 
-        <fog attach="fog" args={["#0a0e27", 30, 100]} />
+      <fog attach="fog" args={["#0a0e27", 30, 100]} />
 
-        <Environment preset="night" />
+      <Environment preset="night" />
 
-        {children}
+      <OrbitControls
+        enableZoom={true}
+        enablePan={true}
+        enableRotate={true}
+        maxDistance={100}
+        minDistance={10}
+        maxPolarAngle={Math.PI / 1.5}
+        minPolarAngle={Math.PI / 4}
+        dampingFactor={0.05}
+        rotateSpeed={0.5}
+        panSpeed={0.5}
+      />
 
-        <OrbitControls
-          enableZoom={true}
-          enablePan={true}
-          enableRotate={true}
-          maxDistance={100}
-          minDistance={10}
-          maxPolarAngle={Math.PI / 1.5}
-          minPolarAngle={Math.PI / 4}
-          dampingFactor={0.05}
-          rotateSpeed={0.5}
-          panSpeed={0.5}
-        />
+      {/* Render children directly; suspenders should be wrapped individually by the caller to avoid hiding the whole scene */}
+      {children}
 
-        <Preload all />
-      </Suspense>
+      <Preload all />
 
       <EffectComposer>
         <Bloom intensity={1.5} luminanceThreshold={0.2} luminanceSmoothing={0.9} mipmapBlur />

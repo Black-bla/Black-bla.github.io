@@ -1,4 +1,6 @@
 import MainCanvas from './components/Canvas/MainCanvas';
+import { Suspense } from 'react';
+import CanvasLoader from './components/Shared/CanvasLoader';
 import CameraController from './components/Canvas/CameraController';
 import CenterHub from './components/Sections/CenterHub';
 import ProjectsQuadrant from './components/Sections/ProjectsQuadrant';
@@ -117,7 +119,9 @@ export default function App() {
         <CenterHub />
         <PortalGateways onPortalClick={flyToSection} currentSection={currentSection} />
         <ProjectsQuadrant />
-        <AboutZone />
+        <Suspense fallback={<CanvasLoader />}>
+          <AboutZone />
+        </Suspense>
         <SkillsConstellation />
         <TimelineDimension />
         <ContactPortal />

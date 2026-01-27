@@ -87,7 +87,7 @@ export default function CenterHub() {
       </mesh>
 
       <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
-        <Text ref={textRef} position={[0, 0, 0]} fontSize={5} maxWidth={200} lineHeight={1} letterSpacing={0.15} textAlign="center" anchorX="center" anchorY="middle" font="/fonts/Orbitron-Bold.ttf">
+        <Text ref={textRef} position={[0, 0, 0]} fontSize={5} maxWidth={200} lineHeight={1} letterSpacing={0.15} textAlign="center" anchorX="center" anchorY="middle">
           MUNGUTI
           <meshStandardMaterial color="#00ffff" emissive="#00ffff" emissiveIntensity={0.5} metalness={1} roughness={0.1} transparent opacity={0.9} />
         </Text>
@@ -98,7 +98,7 @@ export default function CenterHub() {
         <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={0.3} transparent opacity={0.3} />
       </Text>
 
-      <Text position={[0, -4, 0]} fontSize={0.9} color="#00ff00" anchorX="center" anchorY="middle" font="/fonts/RobotoMono-Regular.ttf">
+      <Text position={[0, -4, 0]} fontSize={0.9} color="#00ff00" anchorX="center" anchorY="middle">
         {'> CREATIVE_DEVELOPER.exe'}
         <meshStandardMaterial emissive="#00ff00" emissiveIntensity={0.5} />
       </Text>
