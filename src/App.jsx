@@ -18,12 +18,15 @@ import ErrorBoundary from './components/Shared/ErrorBoundary';
 import HolographicGrid from './components/Effects/HolographicGrid';
 import DataStreams from './components/Effects/DataStreams';
 import PostProcessing from './components/Canvas/PostProcessing';
+import { SettingsProvider } from './context/SettingsContext';
+import PerformanceToggle from './components/UI/PerformanceToggle';
 
 export default function App() {
   const { cameraRef, flyToSection, currentSection } = useCamera();
 
   return (
     <ErrorBoundary>
+      <SettingsProvider>
       <>
       {/* Mini-map navigation */}
       <MiniMap currentSection={currentSection} onNavigate={flyToSection} />
@@ -127,7 +130,9 @@ export default function App() {
         <ContactPortal />
         <PostProcessing />
       </MainCanvas>
+      <PerformanceToggle />
       </>
+      </SettingsProvider>
     </ErrorBoundary>
   );
 }

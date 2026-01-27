@@ -6,7 +6,7 @@ export default function ParticleSystem() {
   const particlesRef = useRef();
   
   // Generate particle positions
-  const particleCount = 2000;
+  const particleCount = 500;
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
@@ -19,15 +19,16 @@ export default function ParticleSystem() {
   }, []);
 
   // Animate particles
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (particlesRef.current) {
-      particlesRef.current.rotation.y += 0.0002;
-      
-      // Gentle wave motion
+      // small, constant rotation
+      particlesRef.current.rotation.y += delta * 0.05;
+
+      // Gentle wave motion - update fewer times per frame by using a small amplitude
       const positions = particlesRef.current.geometry.attributes.position.array;
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
-        positions[i3 + 1] += Math.sin(state.clock.elapsedTime + i * 0.01) * 0.005;
+        positions[i3 + 1] += Math.sin(state.clock.elapsedTime + i * 0.01) * 0.0015;
       }
       particlesRef.current.geometry.attributes.position.needsUpdate = true;
     }
@@ -44,7 +45,7 @@ export default function ParticleSystem() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.1}
+        size={0.08}
         color="#ffffff"
         transparent
         opacity={0.6}

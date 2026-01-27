@@ -13,7 +13,8 @@ export default function CenterHub() {
 
   const particles = useMemo(() => {
     const temp = [];
-    for (let i = 0; i < 2000; i++) {
+    const PARTICLE_COUNT = 500;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI;
       const radius = 12 + Math.random() * 8;
@@ -132,7 +133,7 @@ export default function CenterHub() {
         <pointsMaterial size={0.15} color="#00ffff" transparent opacity={0.8} sizeAttenuation blending={THREE.AdditiveBlending} />
       </points>
 
-      <Sparkles count={100} scale={20} size={2} speed={0.3} color="#00ffff" opacity={0.5} />
+      <Sparkles count={40} scale={12} size={1.2} speed={0.25} color="#00ffff" opacity={0.5} />
 
       {[0, 1, 2, 3, 4, 5].map((i) => {
         const angle = (i / 6) * Math.PI * 2;
